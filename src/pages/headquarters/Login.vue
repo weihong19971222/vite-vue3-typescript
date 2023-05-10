@@ -1,13 +1,13 @@
 <script setup lang="ts">
 import baseButton from "@/components/Button/index.vue"
 import baseInput from "@/components/Input/index.vue"
-import { ref,inject,Ref } from 'vue'
+import { ref } from 'vue'
 import { Login } from '@/requests/api.ts'
+import { useStore } from 'vuex'
 
-const store = inject("store");
+const store = useStore()
 const account_number = ref("")
 const password = ref("")
-const errorMsg:Ref<string> = ref(store.errorPromptMsg)
 
 const fetchData = async (): Promise<any> => {
     const post = {
@@ -19,7 +19,7 @@ const fetchData = async (): Promise<any> => {
         if(res.data.success){
 
         }else{
-            errorMsg.value = res.data.msg
+            store.commit('updateMsg',res.data.msg)
         }
     })
 }

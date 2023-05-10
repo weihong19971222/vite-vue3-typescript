@@ -1,20 +1,18 @@
 <script setup lang="ts">
     import promptWindow from "@/components/PromptWindow/index.vue"
-    import { inject, ref, watch  } from "vue";
+    import { ref, watch } from "vue";
+    import { useStore } from 'vuex'
 
-    import type { Ref } from 'vue'
-    const store = inject("store");
-    
-    const errorMsg:Ref<string> = ref(store?.errorPromptMsg)
+    const store = useStore()    
     const promptShow = ref(false)
     const setPromptShow = function(e:boolean){
       promptShow.value = e
       if(!e){
-        errorMsg.value = ''
+        store.commit('updateMsg','')
       }
     }
-    watch(errorMsg, ( newValue ) => {
-      if(newValue !== ''){
+    watch(store.state.errorPromptMsg, ( newValue ) => {            
+      if(newValue.msg !== ''){
         promptShow.value = true
       }
     })
@@ -27,7 +25,7 @@
     :promptShow=promptShow
     promptTitle="錯誤訊息">
     <template #prompt-content >
-        <div class="error-msg-content">{{ errorMsg }}</div>
+        <div class="error-msg-content">{{ store.state.errorPromptMsg.msg }}</div>
     </template>  
   </promptWindow>
 </template>
