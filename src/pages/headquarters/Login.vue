@@ -4,12 +4,31 @@ import baseInput from "@/components/Input/index.vue"
 import { ref } from 'vue'
 import { Login } from '@/requests/api.ts'
 import { useStore } from 'vuex'
+import { validate } from '@/validation/index.ts'
 
 const store = useStore()
 const account_number = ref("")
 const password = ref("")
 
 const fetchData = async (): Promise<any> => {
+
+    const validation = validate([
+        {
+            data:account_number.value,
+            validate: "string|min:6",
+            translate: "帳號"
+        },
+        {
+            data:password.value,
+            validate: "string|min:6",
+            translate: "密碼"
+        }
+    ])
+    if(validation !== ''){
+        store.commit('updateMsg',validation)
+        return
+    }
+
     const post = {
         'account_number': account_number.value,
         'password': password.value
