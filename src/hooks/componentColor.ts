@@ -5,8 +5,8 @@ const BLUE = "#1961B6"
 export function btnStyle (isDisabled:Boolean,style:String) {
   if(isDisabled)
     return {
-      'color':'#FFFFFF',
-      'backgroundColor':'#818181'
+      'color':'#8C8C8C',
+      'backgroundColor':'#E0E0E0'
     }
   switch(style){
     case 'terraYellow':
