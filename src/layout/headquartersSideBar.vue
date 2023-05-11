@@ -1,33 +1,89 @@
 <script setup lang="ts">
-    import { reactive } from 'vue'
+    import { reactive,watch,onMounted } from 'vue'
+    import  { useRouter } from 'vue-router'
     const sideBars = reactive([
         {
             abbreviation:'人',
             title:'人資管理',
-            show:false
+            show:false,
+            childrens:[
+                {
+                    childrenTitle:'員工資料',
+                    key:'/staff',
+                    src:'staff'
+                }
+            ]
+        },
+        {
+            abbreviation:'司',
+            title:'公司管理',
+            show:false,
+            childrens:[
+                {
+                    childrenTitle:'門市',
+                    key:'/storeBranche',
+                    src:'storeBranche'
+                }
+            ]
         }
     ])
-    const showBar = (sideBarShow) => {        
-        sideBarShow = !sideBarShow
-    }
+    const route = useRouter()
+
+    const init = () => {
+        let breakFor:boolean = false
+        sideBars.forEach(sideBar=>{
+            sideBar.show = false
+            if(!breakFor){
+                sideBar.childrens.forEach(e=>{
+                    if(route.currentRoute.value.path.includes(e.key)){
+                        sideBar.show = true
+                        breakFor = true
+                    }
+                })
+            }
+        })        
+    };
+
+    onMounted(() => {
+        init()
+    });
+    
+    watch(() => route.currentRoute.value.path, () => {
+        init()  
+    });
+    
 </script>
 <template>
     <div :class=$style.background>
         <div :class="$style['side-bar']">
             <div :class="$style['side-bar-title']">村露國際</div>
             <div :class="$style['side-bar-bar']">
-                <div @click="showBar(sideBar.show)" v-for="sideBar in sideBars" :class="$style['side-bar-bar-item']">
-                    <div :class="$style['side-bar-bar-abbreviation']">{{sideBar.abbreviation}}</div>
-                    <div :class="$style['side-bar-bar-title']">{{sideBar.title}}</div>
-                    <svg width="17" height="9" viewBox="0 0 17 9" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M16 0.5L8.5 8L1 0.499999" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
+                <div v-for="sideBar in sideBars">
+                    <div 
+                        @click="sideBar.show = !sideBar.show"  
+                        :class="$style['side-bar-bar-item']">
+                        <div :class="$style['side-bar-bar-abbreviation']">{{sideBar.abbreviation}}</div>
+                        <div :class="$style['side-bar-bar-title']">{{sideBar.title}}</div>
+                        <svg :style="{ transform: sideBar.show ? 'rotate(180deg)': 'rotate(0deg)' }" width="17" height="9" viewBox="0 0 17 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M16 0.5L8.5 8L1 0.499999" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+                    <div :style="{ display: sideBar.show ? 'block': 'none' }" :class="$style['side-bar-childrens']">
+                        <div 
+                            v-for="children in sideBar.childrens"
+                            @click="route.push(children.src)"
+                            :class="[
+                                $style['side-bar-children'],
+                                {[$style.active]:route.currentRoute.value.path.includes(children.key)}
+                            ]">
+                            {{children.childrenTitle}}
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-        <div>
-            <div>up</div>
-            <div>down</div>
+        <div :class=$style.content>
+            <router-view />
         </div>
     </div>
 </template>
@@ -64,6 +120,7 @@
                 font-size: 18px;
                 padding-left: 35px;
                 padding-right: 33px;
+                &.active,
                 &:hover{
                     color: white;
                     background-color: #1961B6;
@@ -82,8 +139,30 @@
                     margin-left:auto;
                 }
             }
+            .side-bar-childrens{
+                margin-top: 5px;
+                margin-bottom: 5px;
+                .side-bar-children{
+                    cursor: pointer;
+                    display: flex;
+                    align-items: center;
+                    font-weight: 400;
+                    font-size: 18px;
+                    height: 60px;
+                    padding-left: 80px;
+                    border-radius: 0px 30px 30px 0px;
+                    &.active,
+                    &:hover{
+                        color: white;
+                        background-color: #124178;
+                    }
+                }
+            }
             
         }
+    }
+    .content{
+        width: calc(100% - 280px);
     }
 }
 </style>

@@ -4,8 +4,15 @@ import { createRouter, createWebHistory, RouteRecordRaw} from 'vue-router'
 const routes: Array<RouteRecordRaw> = [
   { path: "/", redirect: "/login"},
   { path: '/login', component: () => import("@/pages/headquarters/Login.vue") },
-  { path: '/side', component: () => import("@/layout/headquartersSideBar.vue") },
-
+  { 
+    path: '/headquarters',
+    component: () => import("@/layout/headquartersSideBar.vue"),
+    redirect: "/headquarters/staff",
+    children: [
+      { path: 'staff', component: () => import("@/pages/headquarters/managedManagement/staff/index.vue") },
+      { path: 'storeBranche', component: () => import("@/pages/headquarters/StoreBranche.vue") }
+    ]
+  }
 ]
 
 

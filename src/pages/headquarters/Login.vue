@@ -71,7 +71,7 @@ const fetchData = async (): Promise<any> => {
                     style="width: 100%;"
                     :onClick="()=>fetchData()"
                 >登入</baseButton>
-                <div :class="$style['to-store-href']" >前往<a href="#">門市後台</a></div>
+                <div :class="$style['to-store-href']" >前往<a href="/headquarters">門市後台</a></div>
                 <div :class="$style['hint-msg']"> <img src="@/assets/hint-icon.svg" /> 由總部人員註冊帳號</div>
             </div>
         </div>
