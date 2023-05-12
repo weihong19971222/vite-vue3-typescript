@@ -34,33 +34,5 @@
 </template>
 
 <style lang="scss" scoped>
-    #prompt-window{
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        z-index: 999999999;
-        height: 100vh;
-        background: rgba(0, 0, 0, 0.75);
-        #prompt-area{
-            padding:37px 20px ;
-            min-width: 492px;
-            min-height: 200px;
-            max-height: 980px;
-            background: white;
-            border-radius: 5px;
-            .prompt-title{
-                font-weight: 400;
-                font-size: 22px;
-                margin-bottom: 37px;
-                img{
-                    cursor: pointer;
-                    float: right;
-                }
-            }
-        }
-    }
+    @import '@/assets/scss/promptEindow.scss';
 </style>

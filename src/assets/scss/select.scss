@@ -39,6 +39,13 @@
         border-radius: 0px 0px 5px 5px;
         .option{
             padding: 12px 15px;
+            &.notfound{
+                text-align: center;
+                color: rgba(255,82,79,0.8);
+                &:hover{
+                    background: none;
+                }
+            }
             &:hover{
                 background: #E0E0E0;
             }

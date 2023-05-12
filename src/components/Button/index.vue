@@ -43,34 +43,6 @@
 </template>
   
 <style lang="scss" scoped>
-    button{
-        cursor: pointer;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        font-weight: 400;
-        font-size: 20px;
-        border-radius: 5px;
-        border: 0;
-        opacity: 1;
-        &:hover{
-            opacity: 0.9;
-        }
-    }
-    .loader {
-        top:-50;
-        margin-right: 5px;
-        border: 3px solid #f3f3f3;
-        border-top: 3px solid #9c1111;
-        border-radius: 50%;
-        width: 18px;
-        height: 18px;
-        display: inline-block;
-        animation: spin 2s linear infinite;
-    }
-    @keyframes spin {
-        0% { transform: rotate(0deg); }
-        100% { transform: rotate(360deg); }
-    }
+    @import '@/assets/scss/button.scss';
 </style>
 

@@ -6,23 +6,27 @@ import searchSelect from "@/components/Select/index.vue"
 
 const searchValue = ref("")
 
-const obj = reactive([
+const company = reactive([
     {
-        id: 1,
-        name: "张三"
-    },
-    {
-        id: 2,
-        name: "李四"
-    },
-    {
-        id: 3,
-        name: "王五"
+        id: 0,
+        name: "不分公司"
     }
 ])
 
-const getSelectValue = (item) => {
-    console.log(item.id);
+const store = reactive([
+    {
+        id: 0,
+        name: "不分店別"
+    }
+])
+
+const getSelectComapnyValue = (item) => {
+    console.log(item);
+    
+};
+
+const getSelectStoreValue = (item) => {
+    console.log(item);
 };
 
 </script>
@@ -33,8 +37,12 @@ const getSelectValue = (item) => {
         <div>
             <div :class="$style['select-group']">
                 <searchSelect
-                    v-model=obj
-                    @get-select-value="getSelectValue"></searchSelect>
+                    style="margin-right: 20px;"
+                    v-model=company
+                    @get-select-value="getSelectComapnyValue"></searchSelect>
+                <searchSelect
+                    v-model=store
+                    @get-select-value="getSelectStoreValue"></searchSelect>
             </div>
             <div :class="$style['store-staff-btn']">
                 <baseButton>新增員工</baseButton>

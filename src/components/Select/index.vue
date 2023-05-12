@@ -1,5 +1,5 @@
 <script setup lang="ts">
-    import { ref,computed } from "vue"
+    import { ref,computed,onMounted,watch } from "vue"
 
     interface selectData {
         id: number;
@@ -7,7 +7,7 @@
     }
 
     const props = defineProps({
-        modelValue:{type: Array<selectData>},
+        modelValue:{type: Array<selectData>, default:()=>[{}]},
         width:{type: String, default:"200px"}
     })    
 
@@ -15,6 +15,7 @@
 
     const searchOpen = ref(false)
     const searchText = ref('')
+    const selectItem = ref()
     const datas = computed(() => {
         if(searchText.value != ''){
             let item: Array<selectData> = []
@@ -29,10 +30,22 @@
     })
 
     const select = (item) => {
+        selectItem.value = item
         searchOpen.value = false
         searchText.value = item.name
         emit('get-select-value', item)
     };
+
+    onMounted(() => {        
+        const firstData = props.modelValue[0]
+        select(firstData)
+    });
+
+    watch(() => searchOpen.value, () => {
+        if(!searchOpen.value && datas.value?.length === 0){
+            searchText.value = selectItem.value.name
+        }
+    });
 
 </script>
 <template>
@@ -42,7 +55,8 @@
             <img src="@/assets/sideBarBtn.svg" @click="searchOpen = !searchOpen">
         </div>
         <div v-show="searchOpen" class="srearch-select-option">
-            <div class="option" v-for="item in datas" :key="item.id" @click="select(item)">{{item.name}}</div>
+            <div v-if="datas?.length === 0" class="option notfound">查無資料</div>
+            <div v-else class="option" v-for="item in datas" :key="item.id" @click="select(item)">{{item.name}}</div>
         </div>
     </div>
 </template>
