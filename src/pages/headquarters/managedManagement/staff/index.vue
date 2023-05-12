@@ -3,7 +3,8 @@ import { ref,reactive,onMounted } from 'vue'
 import indexLayout from "@/layout/headquartersIndex.vue"
 import baseButton from "@/components/Button/index.vue"
 import searchSelect from "@/components/Select/index.vue"
-import { GetRiverBirdStore,GetStore } from '@/requests/api.ts'
+import baseTable from "@/components/Table/index.vue"
+import { GetRiverBirdStore,GetStore,GetStaff } from '@/requests/api.ts'
 
 const searchValue = ref("")
 
@@ -21,15 +22,26 @@ const store = [
     }
 ]
 
+const staffs:Array<Object> = reactive([])
+
+const tableConfig = {
+    columns: [
+        {title:"公司",key:"storeName"},
+        {title:"員工編號",key:"userCode"},
+        {title:"姓名",key:"name"}
+    ],
+    itemShow:true,
+    tableInfoShow:true
+}
+
 const storeRef = reactive(store)
 
 const getSelectComapnyValue = (item) => {
-    // console.log(item);
     if(item.id !== 0){
         storeRef.push({
-                id: 0,
-                name: "不分店別"
-            })
+            id: 0,
+            name: "不分店別"
+        })
     }
     
 };
@@ -44,7 +56,13 @@ const fetchData = async (): Promise<any> => {
 
 }
 
-onMounted(() => {        
+onMounted(() => {     
+    GetStaff().then((res:any) => {
+        if(res.data.success){
+            staffs.push(...res.data.data)
+        }
+    })
+    
     GetRiverBirdStore().then((res:any) => {
         if(res.data.success){
             store.push(...res.data.data)
@@ -76,6 +94,16 @@ onMounted(() => {
             <div :class="$style['store-staff-btn']">
                 <baseButton>新增員工</baseButton>
             </div>
+            <baseTable
+                :datas=staffs
+                :config=tableConfig>
+                <template #table-option="data">
+                    <!-- {{data.data.id}} -->
+                    <img src="@/assets/table-show-icon.svg">
+                    <img src="@/assets/table-update-icon.svg">
+                    <img src="@/assets/table-delete-icon.svg">
+                </template>
+            </baseTable>
         </div>
     </indexLayout>
 </template>
@@ -87,6 +115,7 @@ onMounted(() => {
 }
 .store-staff-btn{
     margin-top: 15px;
+    margin-bottom: 15px;
     text-align: right;
 }
 </style>

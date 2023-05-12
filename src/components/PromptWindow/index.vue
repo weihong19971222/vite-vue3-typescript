@@ -21,8 +21,8 @@
 </script>
 
 <template>
-  <div @click.self="disablePrompt" v-show="props.promptShow" id="prompt-window">
-    <div id="prompt-area" v-bind:style="promptAreaStyle">
+  <div @click.self="disablePrompt" v-show="props.promptShow" class="prompt-window">
+    <div class="prompt-area" v-bind:style="promptAreaStyle">
         <div class="prompt-title">
             <slot name="prompt-title">{{ promptTitle }}</slot>
             <img @click.prevent="disablePrompt" v-show="props.crossBtn" src="@/assets/cross.svg">

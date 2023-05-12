@@ -1,4 +1,4 @@
-#prompt-window{
+.prompt-window{
     display: flex;
     justify-content: center;
     align-items: center;
@@ -9,7 +9,7 @@
     z-index: 999999999;
     height: 100vh;
     background: rgba(0, 0, 0, 0.75);
-    #prompt-area{
+    .prompt-area{
         padding:37px 20px ;
         min-width: 492px;
         min-height: 200px;

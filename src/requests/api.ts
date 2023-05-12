@@ -22,3 +22,11 @@ export function GetRiverBirdStore () {
     method: 'get'
   })
 }
+
+
+export function GetStaff () {
+  return request({
+    url: 'user',
+    method: 'get'
+  })
+}
