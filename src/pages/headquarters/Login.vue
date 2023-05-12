@@ -5,10 +5,13 @@ import { ref } from 'vue'
 import { Login } from '@/requests/api.ts'
 import { useStore } from 'vuex'
 import { validate } from '@/validation/index.ts'
+import { setCookie } from 'typescript-cookie'
+import  { useRouter } from 'vue-router'
 
 const store = useStore()
 const account_number = ref("")
 const password = ref("")
+const route = useRouter()
 
 const fetchData = async (): Promise<any> => {
 
@@ -34,9 +37,15 @@ const fetchData = async (): Promise<any> => {
         'password': password.value
     }
     await Login(post).then((res:any) => {
-        console.log('login', res)
         if(res.data.success){
-
+            const resData = res.data.data
+            const user = {
+                id:resData.user.id,
+                name:resData.user.name
+            }
+            setCookie('token', resData.token)
+            setCookie('user', JSON.stringify(user))
+            route.push('headquarters')
         }else{
             store.commit('updateMsg',res.data.msg)
         }

@@ -19,7 +19,7 @@
     const datas = computed(() => {
         if(searchText.value != ''){
             let item: Array<selectData> = []
-            props.modelValue?.forEach(e=>{
+            props.modelValue.forEach(e=>{
                 if(e.name.includes(searchText.value)){
                     item.push(e)
                 }
@@ -42,7 +42,7 @@
     });
 
     watch(() => searchOpen.value, () => {
-        if(!searchOpen.value && datas.value?.length === 0){
+        if(!searchOpen.value && datas.value.length === 0){
             searchText.value = selectItem.value.name
         }
     });
@@ -55,7 +55,7 @@
             <img src="@/assets/sideBarBtn.svg" @click="searchOpen = !searchOpen">
         </div>
         <div v-show="searchOpen" class="srearch-select-option">
-            <div v-if="datas?.length === 0" class="option notfound">查無資料</div>
+            <div v-if="datas.length === 0" class="option notfound">查無資料</div>
             <div v-else class="option" v-for="item in datas" :key="item.id" @click="select(item)">{{item.name}}</div>
         </div>
     </div>

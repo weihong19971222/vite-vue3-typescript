@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory, RouteRecordRaw} from 'vue-router'
+import { getCookie } from 'typescript-cookie'
 
 // 創建一個 routes 陣列，定義所有 route 路徑
 const routes: Array<RouteRecordRaw> = [
@@ -8,6 +9,9 @@ const routes: Array<RouteRecordRaw> = [
     path: '/headquarters',
     component: () => import("@/layout/headquartersSideBar.vue"),
     redirect: "/headquarters/staff",
+    meta: { 
+      requiresHeadquartersAuth: true 
+    },
     children: [
       { path: 'staff', component: () => import("@/pages/headquarters/managedManagement/staff/index.vue") },
       { path: 'storeBranche', component: () => import("@/pages/headquarters/StoreBranche.vue") }
@@ -20,6 +24,15 @@ const routes: Array<RouteRecordRaw> = [
 const router = createRouter({
   history: createWebHistory(),
   routes // 導入使用上方 routes 所定義的路徑
+})
+
+router.beforeEach((to, from) => {  
+  if ( to.meta.requiresHeadquartersAuth && getCookie('token') === undefined ) {
+    return {
+      path: '/login',
+      query: { redirect: to.fullPath },
+    }
+  }
 })
 
   
