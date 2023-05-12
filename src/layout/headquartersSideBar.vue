@@ -83,15 +83,21 @@
             </div>
         </div>
         <div :class=$style.content>
-            <router-view />
+            <div :class="[$style['content-div']]">
+                <router-view />
+            </div>
         </div>
     </div>
 </template>
 <style lang="scss" module>
+.test{
+    color: red;
+}
 .background{
     min-height: 1080px;
-    min-width: 1920px;
+    // min-width: 1920px;
     height: 100vh;
+    width: 100vw;
     display: flex;
     .side-bar{
         width: 280px;
@@ -162,7 +168,11 @@
         }
     }
     .content{
+        overflow: auto;
         width: calc(100% - 280px);
+        .content-div{
+            min-width: 1640px;
+        }
     }
 }
 </style>

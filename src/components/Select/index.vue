@@ -14,10 +14,11 @@
     const emit = defineEmits(['get-select-value'])
 
     const searchOpen = ref(false)
+    const inputFocus = ref(false)
     const searchText = ref('')
     const selectItem = ref()
     const datas = computed(() => {
-        if(searchText.value != ''){
+        if(searchText.value != '' && inputFocus.value){
             let item: Array<selectData> = []
             props.modelValue.forEach(e=>{
                 if(e.name.includes(searchText.value)){
@@ -42,7 +43,7 @@
     });
 
     watch(() => searchOpen.value, () => {
-        if(!searchOpen.value && datas.value.length === 0){
+        if(!searchOpen.value ){
             searchText.value = selectItem.value.name
         }
     });
@@ -51,12 +52,18 @@
 <template>
     <div :style="{width:props.width}" :class="['srearch-select',{'active':searchOpen}]" @click.self="searchOpen = !searchOpen">
         <div class="srearch-select-show-search">
-            <input v-model="searchText" type="text" @focus="searchOpen = true">
+            <input v-model="searchText" type="text" @focus="{searchOpen = true;inputFocus=true;}" @blur="inputFocus=false">
             <img src="@/assets/sideBarBtn.svg" @click="searchOpen = !searchOpen">
         </div>
         <div v-show="searchOpen" class="srearch-select-option">
             <div v-if="datas.length === 0" class="option notfound">查無資料</div>
-            <div v-else class="option" v-for="item in datas" :key="item.id" @click="select(item)">{{item.name}}</div>
+            <div 
+                v-else 
+                v-for="item in datas"
+                class="option" 
+                :key="item.id" @click="select(item)">
+                {{item.name}}
+            </div>
         </div>
     </div>
 </template>

@@ -5,8 +5,8 @@ import { ref } from 'vue'
 import { Login } from '@/requests/api.ts'
 import { useStore } from 'vuex'
 import { validate } from '@/validation/index.ts'
+import { useRouter } from 'vue-router'
 import { setCookie } from 'typescript-cookie'
-import  { useRouter } from 'vue-router'
 
 const store = useStore()
 const account_number = ref("")
