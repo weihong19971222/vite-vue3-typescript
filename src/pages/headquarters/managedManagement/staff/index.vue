@@ -4,7 +4,7 @@ import indexLayout from "@/layout/headquartersIndex.vue"
 import baseButton from "@/components/Button/index.vue"
 import searchSelect from "@/components/Select/index.vue"
 import baseTable from "@/components/Table/index.vue"
-import { GetRiverBirdStore,GetStore,GetStaff } from '@/requests/api.ts'
+import { GetRiverBirdStoreList,GetStoreList,GetStaff } from '@/requests/api.ts'
 
 const searchValue = ref("")
 
@@ -47,7 +47,7 @@ const getSelectComapnyValue = (item) => {
 };
 
 const getSelectStoreValue = (item) => {
-    // console.log(item);
+    console.log(item);
 };
 
 
@@ -58,13 +58,13 @@ onMounted(() => {
         }
     })
     
-    GetRiverBirdStore().then((res:any) => {
+    GetRiverBirdStoreList().then((res:any) => {
         if(res.data.success){
             store.push(...res.data.data)
         }
     })
 
-    GetStore().then((res:any) => {
+    GetStoreList().then((res:any) => {
         if(res.data.success){
             company.push(...res.data.data)
         }
@@ -77,7 +77,7 @@ onMounted(() => {
     <indexLayout
         v-model="searchValue">
         <div>
-            <div :class="$style['select-group']">
+            <div class="index-layout-select-group">
                 <searchSelect
                     style="margin-right: 20px;"
                     v-model=company
@@ -86,7 +86,7 @@ onMounted(() => {
                     v-model=storeRef
                     @get-select-value="getSelectStoreValue"></searchSelect>
             </div>
-            <div :class="$style['store-staff-btn']">
+            <div class="index-layout-store-btn">
                 <baseButton>新增員工</baseButton>
             </div>
             <baseTable
@@ -104,13 +104,4 @@ onMounted(() => {
 </template>
 
 <style lang="scss" module>
-.select-group{
-    margin-top: 20px;
-    display: flex;
-}
-.store-staff-btn{
-    margin-top: 15px;
-    margin-bottom: 15px;
-    text-align: right;
-}
 </style>

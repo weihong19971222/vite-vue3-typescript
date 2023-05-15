@@ -3,7 +3,7 @@
     import { watch } from 'vue';
 
     const props = defineProps({
-        btnStyle: { type: String, default: 'blue',value:['darkBlue','terraYellow','blue']},
+        btnStyle: { type: String, default: 'blue',value:['darkBlue','terraYellow','blue','blank']},
         btnSize: { type: String, default: 'normal',value:['small','normal','large']},
         onClick: { type: Function, default:() => {}},
         isDisabled: { type: Boolean, default: false },

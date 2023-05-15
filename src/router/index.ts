@@ -14,7 +14,7 @@ const routes: Array<RouteRecordRaw> = [
     },
     children: [
       { path: 'staff', component: () => import("@/pages/headquarters/managedManagement/staff/index.vue") },
-      { path: 'storeBranche', component: () => import("@/pages/headquarters/StoreBranche.vue") }
+      { path: 'storeBranche', component: () => import("@/pages/headquarters/companyManagement/storeBranche/index.vue") }
     ]
   }
 ]

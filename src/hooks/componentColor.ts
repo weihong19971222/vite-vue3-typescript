@@ -1,6 +1,7 @@
 const DARK_BLUE = "#0E3359"
 const TERRA_YELLOW = "#EFB134"
 const BLUE = "#1961B6"
+const BLANK = "#FFFFFF"
 
 export function btnStyle (isDisabled:Boolean,style:String) {
   if(isDisabled)
@@ -15,10 +16,15 @@ export function btnStyle (isDisabled:Boolean,style:String) {
         'backgroundColor':TERRA_YELLOW
       }
     case 'darkBlue':
-        return {
-          'color':'#FFFFFF',
-          'backgroundColor':DARK_BLUE
-        }
+      return {
+        'color':'#FFFFFF',
+        'backgroundColor':DARK_BLUE
+      }
+    case 'blank':
+      return {
+        'color':'#000000',
+        'backgroundColor':BLANK
+      }
     default:
       return {
         'color':'#FFFFFF',

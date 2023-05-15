@@ -9,14 +9,14 @@ export function Login (data: object) {
 }
 
 // list
-export function GetStore () {
+export function GetStoreList () {
   return request({
     url: 'list/store',
     method: 'get'
   })
 }
 
-export function GetRiverBirdStore () {
+export function GetRiverBirdStoreList () {
   return request({
     url: 'list/store/riverBird',
     method: 'get'
@@ -27,6 +27,13 @@ export function GetRiverBirdStore () {
 export function GetStaff () {
   return request({
     url: 'user',
+    method: 'get'
+  })
+}
+
+export function GetRiverBirdStore () {
+  return request({
+    url: 'store/riverBird',
     method: 'get'
   })
 }
