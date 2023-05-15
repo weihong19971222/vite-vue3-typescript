@@ -1,6 +1,7 @@
 <script setup lang="ts">
     import { reactive,watch,onMounted } from 'vue'
     import  { useRouter } from 'vue-router'
+
     const sideBars = reactive([
         {
             abbreviation:'人',
@@ -94,10 +95,10 @@
     color: red;
 }
 .background{
-    min-height: 1080px;
+    // min-height: 1080px;
     // min-width: 1920px;
     height: 100vh;
-    width: 100vw;
+    // width: 100vw;
     display: flex;
     .side-bar{
         width: 280px;

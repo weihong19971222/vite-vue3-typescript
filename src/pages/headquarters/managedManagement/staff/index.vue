@@ -50,11 +50,6 @@ const getSelectStoreValue = (item) => {
     // console.log(item);
 };
 
-const fetchData = async (): Promise<any> => {
-
-    
-
-}
 
 onMounted(() => {     
     GetStaff().then((res:any) => {

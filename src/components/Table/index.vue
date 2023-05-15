@@ -1,5 +1,5 @@
 <script setup lang="ts">
-
+    import { ref } from 'vue';
     const props = defineProps({
         config:{
             type:Object,
@@ -9,14 +9,28 @@
                 tableInfoShow:false
             }
         },
-        datas:[]
+        pageCount:{
+            type:Number,
+            default:12
+        },
+        datas:{
+            type:Array<Object>,
+            default:[]
+        }
     })
-    console.log(props.datas);
+
+    const pageIndex = ref(1) 
+    
+    const changePage = (i)=>{
+        if (i != 0 && i != Math.ceil(props.datas.length/props.pageCount)+1){
+            pageIndex.value = i;
+        }
+    }
 
 </script>
 <template>
     <div class="table-content">
-        <div v-show="props.config.tableInfoShow">共100項，當前頁次2</div>
+        <div v-show="props.config.tableInfoShow">共{{props.datas.length}}項，當前頁次{{ pageIndex }}</div>
         <div>
             <table>
                 <thead>
@@ -26,7 +40,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr v-for="(data,index) in props.datas">
+                    <tr v-for="(data,index) in props.datas.slice((pageIndex-1)*12, (props.pageCount*pageIndex))">
                         <th v-show="props.config.itemShow">{{ index + 1 }}</th>
                         <td v-for="(columns,index) in props.config.columns">
                             <div v-if="index != props.config.columns.length - 1">{{data[columns.key]}}</div>
@@ -42,9 +56,11 @@
             </table>
         </div>
         <div class="table-pagination">
-            <div>上一頁</div>
-            <div></div>
-            <div>下一頁</div>
+            <div class="table-pagination-btn previous-btn" @click="changePage(pageIndex-1)">上一頁</div>
+            <div class="number-of-pages-group">
+                <div :class='["table-pagination-btn number-of-pages",{"active":i==pageIndex}]' v-for="i in Math.ceil(props.datas.length/props.pageCount)" @click="changePage(i)">{{ i }}</div>
+            </div>
+            <div class="table-pagination-btn next-btn" @click="changePage(pageIndex+1)">下一頁</div>
         </div>
     </div>
 </template>
@@ -93,6 +109,36 @@
     .table-pagination{
         display: flex;
         justify-content: end;
+        .table-pagination-btn{
+            line-height: 30px;
+            cursor: pointer;
+            color: #1961B6;
+            font-weight: 400;
+            font-size: 18px;
+            &.number-of-pages{
+                width: 30px;
+                height: 30px;
+                border-radius: 50%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                &.active{
+                    background: #124178;
+                    color: white;
+                    cursor: default;
+                }
+            }
+            &.previous-btn{
+                margin-right: 40px;
+            }
+            &.next-btn{
+                margin-left: 40px;
+            }
+        }
+        .number-of-pages-group{
+            display: flex;
+        }
+        
     }
 }
 </style>

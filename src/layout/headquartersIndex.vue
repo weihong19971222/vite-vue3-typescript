@@ -1,4 +1,13 @@
 <script setup lang="ts">
+    import { getCookie } from 'typescript-cookie'
+
+    interface userData{
+        name:String
+    }
+
+    const user:any = getCookie('user')
+    const userObject:userData = JSON.parse(user)
+
     const props = defineProps({
         modelValue:{type: String,default:""}
     })
@@ -14,7 +23,7 @@
                 <input :value="props.modelValue" placeholder="搜尋" type="text" @input="updateValue" required>
                 <img src="@/assets/magnifier.svg" >
             </div> 
-            <div :class="$style['index-header-user']">Hello Apple</div>
+            <div :class="$style['index-header-user']">Hello {{ userObject.name }}</div>
         </div>
         <slot></slot>
     </div>
