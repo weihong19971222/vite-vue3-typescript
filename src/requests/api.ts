@@ -37,3 +37,12 @@ export function GetRiverBirdStore () {
     method: 'get'
   })
 }
+
+export function GetFullOrderDiscount () {
+  return request({
+    url: 'fullOrderDiscount',
+    method: 'get'
+  })
+}
+
+

@@ -26,6 +26,18 @@
                     src:'storeBranche'
                 }
             ]
+        },
+        {
+            abbreviation:'優',
+            title:'優惠管理',
+            show:false,
+            childrens:[
+                {
+                    childrenTitle:'全單折扣',
+                    key:'/fullOrderDiscount',
+                    src:'fullOrderDiscount'
+                }
+            ]
         }
     ])
     const route = useRouter()

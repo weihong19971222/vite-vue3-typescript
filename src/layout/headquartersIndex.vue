@@ -20,7 +20,12 @@
     <div :class="$style['index-temp']">
         <div :class="$style['index-header']">
             <div :class="$style['index-header-search']">
-                <input :value="props.modelValue" placeholder="搜尋" type="text" @input="updateValue" required>
+                <input 
+                    :value="props.modelValue" 
+                    placeholder="搜尋" 
+                    type="text" 
+                    @input="updateValue"
+                    >
                 <img src="@/assets/magnifier.svg" >
             </div> 
             <div :class="$style['index-header-user']">Hello {{ userObject.name }}</div>

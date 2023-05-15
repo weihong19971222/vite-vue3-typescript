@@ -14,7 +14,8 @@ const routes: Array<RouteRecordRaw> = [
     },
     children: [
       { path: 'staff', component: () => import("@/pages/headquarters/managedManagement/staff/index.vue") },
-      { path: 'storeBranche', component: () => import("@/pages/headquarters/companyManagement/storeBranche/index.vue") }
+      { path: 'storeBranche', component: () => import("@/pages/headquarters/companyManagement/storeBranche/index.vue") },
+      { path: 'fullOrderDiscount', component: () => import("@/pages/headquarters/discountManagement/fullOrderDiscount/index.vue") }
     ]
   }
 ]
