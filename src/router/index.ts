@@ -23,7 +23,7 @@ const routes: Array<RouteRecordRaw> = [
 
 // 創建一個router，
 const router = createRouter({
-  history: createWebHistory(import.meta.env.BASE_URL),
+  history: createWebHistory(import.meta.env.VITE_APP_BU_URL),
   routes // 導入使用上方 routes 所定義的路徑
 })
 
