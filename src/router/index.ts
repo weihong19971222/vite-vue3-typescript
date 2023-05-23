@@ -1,4 +1,4 @@
-import { createRouter, createWebHistory, RouteRecordRaw} from 'vue-router'
+import { createRouter, createWebHashHistory, RouteRecordRaw} from 'vue-router'
 import { getCookie } from 'typescript-cookie'
 
 // 創建一個 routes 陣列，定義所有 route 路徑
@@ -23,7 +23,7 @@ const routes: Array<RouteRecordRaw> = [
 
 // 創建一個router，
 const router = createRouter({
-  history: createWebHistory(),
+  history: createWebHashHistory(),
   routes // 導入使用上方 routes 所定義的路徑
 })
 
