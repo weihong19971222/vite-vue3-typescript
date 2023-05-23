@@ -27,7 +27,7 @@ const router = createRouter({
   routes // 導入使用上方 routes 所定義的路徑
 })
 
-router.beforeEach((to, from) => {  
+router.beforeEach((to) => {  // to, from
   if ( to.meta.requiresHeadquartersAuth && getCookie('token') === undefined ) {
     return {
       path: '/login',

@@ -94,7 +94,7 @@ onMounted(() => {
                 :config=tableConfig>
                 <template #table-option="data">
                     <!-- {{data.data.id}} -->
-                    <img src="@/assets/table-show-icon.svg">
+                    <img @click="console.log(data)" src="@/assets/table-show-icon.svg">
                     <img src="@/assets/table-update-icon.svg">
                     <img src="@/assets/table-delete-icon.svg">
                 </template>

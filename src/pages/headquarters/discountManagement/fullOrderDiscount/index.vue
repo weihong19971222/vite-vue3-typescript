@@ -62,7 +62,7 @@ const datas = computed(() => {
                 :config=tableConfig>
                 <template #table-option="data">
                     <!-- {{data.data.id}} -->
-                    <img src="@/assets/table-update-icon.svg">
+                    <img  @click="console.log(data)" src="@/assets/table-update-icon.svg">
                     <img src="@/assets/table-delete-icon.svg">
                 </template>
             </baseTable>
