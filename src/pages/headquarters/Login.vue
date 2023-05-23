@@ -113,7 +113,7 @@ const fetchData = async (): Promise<any> => {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-image: url('@/assets/loginBg.png');
+    background-image: url('@/assets/loginbg.png');
     background-size: cover;
     background-position: 50%;
     background-repeat: no-repeat;
