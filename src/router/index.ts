@@ -24,14 +24,14 @@ const router = createRouter({
   routes // 導入使用上方 routes 所定義的路徑
 })
 
-router.beforeEach((to) => {  // to, from
-  // if ( to.meta.requiresHeadquartersAuth && getCookie('token') === undefined ) {
-  //   return {
-  //     path: '/login',
-  //     query: { redirect: to.fullPath },
-  //   }
-  // }
-})
+// router.beforeEach((to) => {  // to, from
+//   // if ( to.meta.requiresHeadquartersAuth && getCookie('token') === undefined ) {
+//   //   return {
+//   //     path: '/login',
+//   //     query: { redirect: to.fullPath },
+//   //   }
+//   // }
+// })
 
   
 // 將 router 物件導出成一個 module
