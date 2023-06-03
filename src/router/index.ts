@@ -25,12 +25,12 @@ const router = createRouter({
 })
 
 router.beforeEach((to) => {  // to, from
-  if ( to.meta.requiresHeadquartersAuth && getCookie('token') === undefined ) {
-    return {
-      path: '/login',
-      query: { redirect: to.fullPath },
-    }
-  }
+  // if ( to.meta.requiresHeadquartersAuth && getCookie('token') === undefined ) {
+  //   return {
+  //     path: '/login',
+  //     query: { redirect: to.fullPath },
+  //   }
+  // }
 })
 
   
