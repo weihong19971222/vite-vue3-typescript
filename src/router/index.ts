@@ -3,19 +3,16 @@ import { getCookie } from 'typescript-cookie'
 
 // 創建一個 routes 陣列，定義所有 route 路徑
 const routes: Array<RouteRecordRaw> = [
-  { path: "/", redirect: "/login"},
-  { path: '/login', component: () => import("@/pages/headquarters/Login.vue") },
   { 
-    path: '/headquarters',
-    component: () => import("@/layout/headquartersSideBar.vue"),
-    redirect: "/headquarters/staff",
+    path: '/',
+    component: () => import("@/layout/demoLayout.vue"),
     meta: { 
       requiresHeadquartersAuth: true 
     },
     children: [
-      { path: 'staff', component: () => import("@/pages/headquarters/managedManagement/staff/index.vue") },
-      { path: 'storeBranche', component: () => import("@/pages/headquarters/companyManagement/storeBranche/index.vue") },
-      { path: 'fullOrderDiscount', component: () => import("@/pages/headquarters/discountManagement/fullOrderDiscount/index.vue") }
+      { path: '', component: () => import("@/pages/demo/vueTransitionGroup.vue") },
+      // { path: 'storeBranche', component: () => import("@/pages/headquarters/companyManagement/storeBranche/index.vue") },
+      // { path: 'fullOrderDiscount', component: () => import("@/pages/headquarters/discountManagement/fullOrderDiscount/index.vue") }
     ]
   }
 ]
