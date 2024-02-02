@@ -3,8 +3,10 @@ import { createRouter, createWebHistory, RouteRecordRaw} from 'vue-router'
 
 // 創建一個 routes 陣列，定義所有 route 路徑
 const routes: Array<RouteRecordRaw> = [
+  { path: "/", redirect: "/login"},
+  { path: '/login', component: () => import("@/pages/headquarters/Login.vue") },
   { 
-    path: '/',
+    path: '/headquarters',
     component: () => import("@/layout/demoLayout.vue"),
     meta: { 
       requiresHeadquartersAuth: true 
