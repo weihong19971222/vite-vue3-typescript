@@ -6,6 +6,18 @@ const routes: Array<RouteRecordRaw> = [
   { path: "/", redirect: "/login"},
   { path: '/login', component: () => import("@/pages/headquarters/Login.vue") },
   { 
+    path: '/richmenu',
+    component: () => import("@/layout/headquartersSideBar.vue"),
+    meta: { 
+      requiresHeadquartersAuth: true 
+    },
+    children: [
+      { path: '', component: () => import("@/pages/richmenu/index.vue") },
+      // { path: 'storeBranche', component: () => import("@/pages/headquarters/companyManagement/storeBranche/index.vue") },
+      // { path: 'fullOrderDiscount', component: () => import("@/pages/headquarters/discountManagement/fullOrderDiscount/index.vue") }
+    ]
+  },
+  { 
     path: '/headquarters',
     component: () => import("@/layout/demoLayout.vue"),
     meta: { 
