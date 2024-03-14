@@ -8,6 +8,6 @@
     </div>
 </template>
 
-<style lang="scss" module>
+<style module>
 
 </style>
